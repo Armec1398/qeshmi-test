@@ -4,13 +4,12 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function GET(req: NextRequest) {
   try {
-    // توکن از کوکی یا header می‌گیریم (Front-end بعد از login میفرسته)
-    const token = req.headers.get("Authorization"); // مثلا "Bearer <token>"
+    const token = req.headers.get("Authorization") || "";
 
     const res = await fetch(`${BASE_URL}/api/Content`, {
       headers: {
         Accept: "application/json",
-        Authorization: token || "",
+        Authorization: token,
       },
     });
 
@@ -22,6 +21,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(data);
   } catch (err) {
+    console.error(err);
     return NextResponse.json({ error: "Server error fetching contents" }, { status: 500 });
   }
 }

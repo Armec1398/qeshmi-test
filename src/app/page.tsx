@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
-import { sendOtp, verifyOtp, fetchContents } from "./lib/api";
+import { sendOtp, verifyOtp, fetchContents, Content } from "./lib/api";
 
 export default function Home() {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState<"phone" | "otp" | "logged">("phone");
-  const [token, setToken] = useState("");
-  const [contents, setContents] = useState<any[]>([]);
+  const [token, setToken] = useState<string>("");
+  const [contents, setContents] = useState<Content[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,8 +17,8 @@ export default function Home() {
     try {
       await sendOtp(phone);
       setStep("otp");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError((err as Error).message);
     } finally {
       setLoading(false);
     }
@@ -29,13 +29,13 @@ export default function Home() {
     setError(null);
     try {
       const data = await verifyOtp(phone, otp);
-      setToken(data.token); // حالا mock token یا واقعی
+      setToken(data.data.token || ""); // mock token یا واقعی
       setStep("logged");
 
-      const contentsData = await fetchContents(data.token);
+      const contentsData = await fetchContents(data.data.token || "");
       setContents(contentsData);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError((err as Error).message);
     } finally {
       setLoading(false);
     }
@@ -85,7 +85,6 @@ export default function Home() {
     );
   }
 
-  // بعد از login، صفحه Content با mock token
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-4">Logged in! Contents</h1>
