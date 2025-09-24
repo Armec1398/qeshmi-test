@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { sendOtp, verifyOtp, fetchContents, Content } from "./lib/api";
+import { sendOtp, verifyOtp, fetchContents, Content } from "../lib/api";
 
 export default function Home() {
   const [phone, setPhone] = useState("");
