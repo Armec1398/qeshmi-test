@@ -87,7 +87,7 @@ export default function Home() {
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Logged in! Contents</h1>
+      <h1 className="text-2xl font-bold mb-4">Hooora! You are Logged in! Contents</h1>
       {contents.length === 0 && <p>No contents available</p>}
       <ul className="space-y-2">
         {contents.map((c) => (
