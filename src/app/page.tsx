@@ -6,7 +6,7 @@ export default function Home() {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState<"phone" | "otp" | "logged">("phone");
-  const [token, setToken] = useState<string>("");
+  const [, setToken] = useState<string>("");
   const [contents, setContents] = useState<Content[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

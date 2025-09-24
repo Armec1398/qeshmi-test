@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const res = await fetch(`${BASE_URL}/api/Users`, {
       headers: {

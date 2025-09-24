@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-const TOKEN = process.env.NEXT_PUBLIC_API_TOKEN; // اگر نیاز بود، می‌تونی هدر اضافه کنی
 
 export async function POST(req: NextRequest) {
   try {
